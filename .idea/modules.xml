@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jdk2trove.iml" filepath="$PROJECT_DIR$/jdk2trove.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdk2trove-example/jdk2trove-example.iml" filepath="$PROJECT_DIR$/jdk2trove-example/jdk2trove-example.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jdk2trove-plugin/jdk2trove-plugin.iml" filepath="$PROJECT_DIR$/jdk2trove-plugin/jdk2trove-plugin.iml" />
+    </modules>
+  </component>
+</project>

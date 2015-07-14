@@ -1,0 +1,25 @@
+<idea-plugin version="2">
+
+    <id>me.artspb.idea.jdk2trove</id>
+    <name>JDK2Trove</name>
+    <version>0.1-SNAPSHOT</version>
+    <vendor email="contact@artspb.me" url="https://artspb.me">Artem Khvastunov</vendor>
+
+    <description><![CDATA[
+      The plugin to support JDK to Trove collections migration.
+    ]]></description>
+
+    <change-notes><![CDATA[
+      The first release is on the way.
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="131"/>
+
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <inspectionToolProvider implementation="me.artspb.idea.jdk2trove.InspectionProvider"/>
+    </extensions>
+
+</idea-plugin>
