@@ -15,9 +15,20 @@ public class THashMapExample {
     private static final Map<Integer, Integer> INT_INT_CONSTANT = new HashMap<>();
     private static final Map<Integer, Integer> IDENTITY_CONSTANT = new IdentityHashMap<>();
 
-    private Map<String, String> field = new HashMap<>();
+    private static final Map<Byte, Byte> BYTE_BYTE_CONSTANT = new HashMap<>();
+    private static final Map<Character, Character> CHAR_CHAR_CONSTANT = new HashMap<>();
+    private static final Map<Double, Double> DOUBLE_DOUBLE_CONSTANT = new HashMap<>();
+    private static final Map<Float, Float> FLOAT_FLOAT_CONSTANT = new HashMap<>();
+    private static final Map<Long, Long> LONG_LONG_CONSTANT = new HashMap<>();
+    private static final Map<Short, Short> SHORT_SHORT_CONSTANT = new HashMap<>();
 
-    public void empty() {
+    private Map<String, String> stringStringField = new HashMap<>();
+    private Map<Integer, String> intStringField = new HashMap<>();
+    private Map<String, Integer> stringIntField = new HashMap<>();
+    private Map<Integer, Integer> intIntField = new HashMap<>();
+    private Map<Integer, Integer> identityField = new IdentityHashMap<>();
+
+    public void plain() {
         Map local = new HashMap();
     }
 
@@ -25,7 +36,7 @@ public class THashMapExample {
         Map local = new HashMap<String, String>();
     }
 
-    public void old() {
+    public void explicit() {
         Map<String, String> local = new HashMap<String, String>();
     }
 
@@ -34,27 +45,28 @@ public class THashMapExample {
     }
 
     public void qualified() {
-        Map<String, String> local = new java.util.HashMap<>();
+        java.util.Map<String, String> local = new java.util.HashMap<>();
     }
 
     public void anonymous() {
-        Map<String, String> local = new HashMap<String, String>() {{}};
+        Map<String, String> local = new HashMap<String, String>() {{
+        }};
     }
 
-    public void exactClass() {
-        HashMap<String, String> local = new HashMap<>(0);
+    public void explicitClass() {
+        HashMap<String, String> local = new HashMap<>();
     }
 
     public void finalLocal() {
         final Map<String, String> local = new HashMap<>();
     }
 
-    public void intObject() {
-        java.util.Map<Integer, String> local = new HashMap<Integer, String>();
+    public void intString() {
+        Map<Integer, String> local = new HashMap<Integer, String>();
     }
 
-    public void objectInt() {
-        java.util.Map<String, Integer> local = new HashMap<String, Integer>();
+    public void stringInt() {
+        Map<String, Integer> local = new HashMap<String, Integer>();
     }
 
     public void intInt() {

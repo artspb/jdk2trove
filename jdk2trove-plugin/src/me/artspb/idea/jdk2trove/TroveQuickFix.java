@@ -93,7 +93,7 @@ abstract public class TroveQuickFix implements LocalQuickFix {
         assert identifier != null;
         String newExpression = PsiReplacementUtil.getElementText(element, identifier, name);
         if (reference.isQualified()) {
-            newExpression = newExpression.replace("java.util.", "");
+            newExpression = newExpression.replaceFirst("java.util.", "");
         }
         return newExpression;
     }

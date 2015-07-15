@@ -7,9 +7,10 @@ public class THashSetExample {
     <warning descr="Inefficient collection use">private static final Set<String> STRING_CONSTANT = new HashSet<>();</warning>
     <warning descr="Inefficient collection use">private static final Set<Integer> INT_CONSTANT = new HashSet<>();</warning>
 
-    <warning descr="Inefficient collection use">private Set<String> field = new HashSet<>();</warning>
+    <warning descr="Inefficient collection use">private Set<String> stringField = new HashSet<>();</warning>
+    <warning descr="Inefficient collection use">private Set<Integer> intField = new HashSet<>();</warning>
 
-    public void empty() {
+    public void plain() {
         <warning descr="Inefficient collection use">Set local = new HashSet();</warning>
     }
 
@@ -17,7 +18,7 @@ public class THashSetExample {
         <warning descr="Inefficient collection use">Set local = new HashSet<String>();</warning>
     }
 
-    public void old() {
+    public void explicit() {
         <warning descr="Inefficient collection use">Set<String> local = new HashSet<String>();</warning>
     }
 
@@ -26,14 +27,15 @@ public class THashSetExample {
     }
 
     public void qualified() {
-        <warning descr="Inefficient collection use">Set<String> local = new java.util.HashSet<>();</warning>
+        <warning descr="Inefficient collection use">java.util.Set<String> local = new java.util.HashSet<>();</warning>
     }
 
     public void anonymous() {
-        <warning descr="Inefficient collection use">Set<String> local = new HashSet<String>() {{}};</warning>
+        <warning descr="Inefficient collection use">Set<String> local = new HashSet<String>() {{
+        }};</warning>
     }
 
-    public void exactClass() {
+    public void explicitClass() {
         <warning descr="Inefficient collection use">HashSet<String> local = new HashSet<>();</warning>
     }
 
@@ -50,6 +52,6 @@ public class THashSetExample {
     }
 
     public Set<Integer> returnLocal() {
-        return new HashSet<>();
+        return new HashSet<Integer>();
     }
 }

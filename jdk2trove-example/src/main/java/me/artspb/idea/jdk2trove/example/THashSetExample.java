@@ -12,9 +12,10 @@ public class THashSetExample {
     private static final Set<String> STRING_CONSTANT = new HashSet<>();
     private static final Set<Integer> INT_CONSTANT = new HashSet<>();
 
-    private Set<String> field = new HashSet<>();
+    private Set<String> stringField = new HashSet<>();
+    private Set<Integer> intField = new HashSet<>();
 
-    public void empty() {
+    public void plain() {
         Set local = new HashSet();
     }
 
@@ -22,7 +23,7 @@ public class THashSetExample {
         Set local = new HashSet<String>();
     }
 
-    public void old() {
+    public void explicit() {
         Set<String> local = new HashSet<String>();
     }
 
@@ -31,15 +32,16 @@ public class THashSetExample {
     }
 
     public void qualified() {
-        Set<String> local = new java.util.HashSet<>();
+        java.util.Set<String> local = new java.util.HashSet<>();
     }
 
     public void anonymous() {
-        Set<String> local = new HashSet<String>() {{}};
+        Set<String> local = new HashSet<String>() {{
+        }};
     }
 
-    public void exactClass() {
-        HashSet<String> local = new HashSet<>(0);
+    public void explicitClass() {
+        HashSet<String> local = new HashSet<>();
     }
 
     public void finalLocal() {
