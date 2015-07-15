@@ -8,7 +8,6 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
 import com.intellij.psi.codeStyle.CodeStyleManager;
 import com.intellij.psi.codeStyle.JavaCodeStyleManager;
-import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.util.IncorrectOperationException;
 import com.siyeh.ig.PsiReplacementUtil;
 import org.jetbrains.annotations.Nls;
@@ -87,15 +86,16 @@ abstract public class TroveQuickFix implements LocalQuickFix {
         if (psiElement == null) {
             psiElement = element;
         }
-        PsiJavaCodeReferenceElement reference = PsiTreeUtil.getChildOfType(psiElement, PsiJavaCodeReferenceElement.class);
+        PsiJavaCodeReferenceElement reference = getChildOfType(psiElement, PsiJavaCodeReferenceElement.class);
         assert reference != null;
-        PsiIdentifier identifier = PsiTreeUtil.getChildOfType(reference, PsiIdentifier.class);
-        assert identifier != null;
-        String newExpression = PsiReplacementUtil.getElementText(element, identifier, name);
         if (reference.isQualified()) {
-            newExpression = newExpression.replaceFirst("java.util.", "");
+            PsiJavaCodeReferenceElement referencePackage = getChildOfType(reference, PsiJavaCodeReferenceElement.class);
+            assert referencePackage != null;
+            referencePackage.delete();
         }
-        return newExpression;
+        PsiIdentifier identifier = getChildOfType(reference, PsiIdentifier.class);
+        assert identifier != null;
+        return PsiReplacementUtil.getElementText(element, identifier, name);
     }
 
     protected void shortenAndReformat(@NotNull Project project, @NotNull PsiElement replacementExp) {
