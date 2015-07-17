@@ -1,4 +1,4 @@
-package me.artspb.idea.jdk2trove.hashset;
+package me.artspb.idea.jdk2trove.hashmap;
 
 import com.intellij.codeInspection.BaseJavaLocalInspectionTool;
 import me.artspb.idea.jdk2trove.TroveTestCase;
@@ -6,10 +6,10 @@ import me.artspb.idea.jdk2trove.TroveTestCase;
 /**
  * @author Artem Khvastunov
  */
-public class THashSetInspectionTest extends TroveTestCase {
+public class THashMapCreationInspectionTest extends TroveTestCase {
 
     public void testRegisterProblem() {
-        myFixture.configureByFile("THashSetExample.java");
+        myFixture.configureByFile("THashMapExample.java");
         myFixture.checkHighlighting(true, false, false, false);
     }
 
@@ -20,6 +20,6 @@ public class THashSetInspectionTest extends TroveTestCase {
 
     @Override
     protected BaseJavaLocalInspectionTool[] getInspections() {
-        return new BaseJavaLocalInspectionTool[]{new THashSetInspection()};
+        return new BaseJavaLocalInspectionTool[]{new THashMapCreationInspection()};
     }
 }

@@ -1,4 +1,4 @@
-package me.artspb.idea.jdk2trove.hashmap;
+package me.artspb.idea.jdk2trove.hashset;
 
 import com.intellij.codeInspection.BaseJavaLocalInspectionTool;
 import com.intellij.codeInspection.LocalQuickFix;
@@ -9,24 +9,23 @@ import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.psi.util.PsiTreeUtil.getChildOfType;
 import static me.artspb.idea.jdk2trove.InspectionProvider.GROUP_DISPLAY_NAME;
-import static me.artspb.idea.jdk2trove.TroveUtils.JDK_HASH_MAP;
-import static me.artspb.idea.jdk2trove.TroveUtils.JDK_IDENTITY_HASH_MAP;
-import static org.apache.commons.lang.WordUtils.capitalize;
+import static me.artspb.idea.jdk2trove.TroveUtils.JDK_HASH_SET;
+import static me.artspb.idea.jdk2trove.TroveUtils.JDK_LINKED_HASH_SET;
 
 /**
  * @author Artem Khvastunov
  */
-public class THashMapInspection extends BaseJavaLocalInspectionTool {
+public class THashSetCreationInspection extends BaseJavaLocalInspectionTool {
 
     @NotNull
     @Override
     public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new THashMapJavaElementVisitor(holder);
+        return new THashSetCreationJavaElementVisitor(holder);
     }
 
     @NotNull
     public String getDisplayName() {
-        return "Trove 'THashMap' instead of JDK 'HashMap'";
+        return "Trove 'THashSet' instead of JDK 'HashSet'";
     }
 
     @NotNull
@@ -39,11 +38,11 @@ public class THashMapInspection extends BaseJavaLocalInspectionTool {
         return true;
     }
 
-    private class THashMapJavaElementVisitor extends JavaElementVisitor {
+    private class THashSetCreationJavaElementVisitor extends JavaElementVisitor {
 
         private final ProblemsHolder holder;
 
-        public THashMapJavaElementVisitor(ProblemsHolder holder) {
+        public THashSetCreationJavaElementVisitor(ProblemsHolder holder) {
             this.holder = holder;
         }
 
@@ -73,31 +72,24 @@ public class THashMapInspection extends BaseJavaLocalInspectionTool {
                 return;
             }
             String qualifiedName = reference.getQualifiedName();
-            if (JDK_HASH_MAP.equals(qualifiedName)) {
+            if (JDK_HASH_SET.equals(qualifiedName)) {
                 checkParameters(element, reference);
-            } else if (JDK_IDENTITY_HASH_MAP.equals(qualifiedName)) {
-                registerProblem(element, TCustomHashMapQuickFix.getInstance());
+            } else if (JDK_LINKED_HASH_SET.equals(qualifiedName)) {
+                registerProblem(element, TLinkedHashSetQuickFix.getInstance());
             }
         }
 
         private void checkParameters(PsiElement element, PsiJavaCodeReferenceElement reference) {
             PsiType[] parameters = reference.getTypeParameters();
-            if (parameters.length == 2) {
-                String type1 = TroveUtils.PRIMITIVE_WRAPPERS.get(parameters[0].getCanonicalText());
-                String type2 = TroveUtils.PRIMITIVE_WRAPPERS.get(parameters[1].getCanonicalText());
-                if (type1 != null) {
-                    if (type2 != null) {
-                        registerProblem(element, new TTypeTypeHashMapQuickFix(type1, type2));
-                    } else {
-                        registerProblem(element, new TTypeObjectHashMapQuickFix(type1));
-                    }
-                } else if (type2 != null) {
-                    registerProblem(element, new TObjectTypeHashMapQuickFix(type2));
+            if (parameters.length == 1) {
+                String type = TroveUtils.PRIMITIVE_WRAPPERS.get(parameters[0].getCanonicalText());
+                if (type != null) {
+                    registerProblem(element, new TTypeHashSetQuickFix(type));
                 } else {
-                    registerProblem(element, THashMapQuickFix.getInstance());
+                    registerProblem(element, THashSetQuickFix.getInstance());
                 }
             } else {
-                registerProblem(element, THashMapQuickFix.getInstance());
+                registerProblem(element, THashSetQuickFix.getInstance());
             }
         }
 

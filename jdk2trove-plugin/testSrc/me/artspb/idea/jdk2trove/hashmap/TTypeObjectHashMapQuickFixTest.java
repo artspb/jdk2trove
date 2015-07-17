@@ -1,7 +1,6 @@
 package me.artspb.idea.jdk2trove.hashmap;
 
 import com.intellij.codeInspection.BaseJavaLocalInspectionTool;
-import junit.framework.TestCase;
 import me.artspb.idea.jdk2trove.TroveTestCase;
 
 /**
@@ -20,7 +19,7 @@ public class TTypeObjectHashMapQuickFixTest extends TroveTestCase {
 
     @Override
     protected BaseJavaLocalInspectionTool[] getInspections() {
-        return new BaseJavaLocalInspectionTool[] {new THashMapInspection()};
+        return new BaseJavaLocalInspectionTool[] {new THashMapCreationInspection()};
     }
 
     @Override

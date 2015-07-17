@@ -19,7 +19,7 @@ public class THashSetQuickFixTest extends TroveTestCase {
 
     @Override
     protected BaseJavaLocalInspectionTool[] getInspections() {
-        return new BaseJavaLocalInspectionTool[]{new THashSetInspection()};
+        return new BaseJavaLocalInspectionTool[]{new THashSetCreationInspection()};
     }
 
     @Override

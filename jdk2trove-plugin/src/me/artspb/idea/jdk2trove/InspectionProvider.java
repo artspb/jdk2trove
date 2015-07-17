@@ -1,8 +1,8 @@
 package me.artspb.idea.jdk2trove;
 
 import com.intellij.codeInspection.InspectionToolProvider;
-import me.artspb.idea.jdk2trove.hashmap.THashMapInspection;
-import me.artspb.idea.jdk2trove.hashset.THashSetInspection;
+import me.artspb.idea.jdk2trove.hashmap.THashMapCreationInspection;
+import me.artspb.idea.jdk2trove.hashset.THashSetCreationInspection;
 
 /**
  * @author Artem Khvastunov
@@ -13,6 +13,6 @@ public class InspectionProvider implements InspectionToolProvider {
 
     @Override
     public Class[] getInspectionClasses() {
-        return new Class[]{THashMapInspection.class, THashSetInspection.class};
+        return new Class[]{THashMapCreationInspection.class, THashSetCreationInspection.class};
     }
 }

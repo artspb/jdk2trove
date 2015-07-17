@@ -1,7 +1,6 @@
 package me.artspb.idea.jdk2trove.hashset;
 
 import com.intellij.codeInspection.BaseJavaLocalInspectionTool;
-import junit.framework.TestCase;
 import me.artspb.idea.jdk2trove.TroveTestCase;
 
 /**
@@ -20,7 +19,7 @@ public class TTypeHashSetQuickFixTest extends TroveTestCase {
 
     @Override
     protected BaseJavaLocalInspectionTool[] getInspections() {
-        return new BaseJavaLocalInspectionTool[] {new THashSetInspection()};
+        return new BaseJavaLocalInspectionTool[] {new THashSetCreationInspection()};
     }
 
     @Override
