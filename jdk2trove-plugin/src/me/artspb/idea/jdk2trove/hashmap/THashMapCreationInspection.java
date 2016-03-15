@@ -1,42 +1,33 @@
 package me.artspb.idea.jdk2trove.hashmap;
 
-import com.intellij.codeInspection.BaseJavaLocalInspectionTool;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.*;
+import me.artspb.idea.jdk2trove.TroveInspection;
 import me.artspb.idea.jdk2trove.TroveUtils;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.psi.util.PsiTreeUtil.getChildOfType;
-import static me.artspb.idea.jdk2trove.InspectionProvider.GROUP_DISPLAY_NAME;
 import static me.artspb.idea.jdk2trove.TroveUtils.JDK_HASH_MAP;
 import static me.artspb.idea.jdk2trove.TroveUtils.JDK_IDENTITY_HASH_MAP;
-import static org.apache.commons.lang.WordUtils.capitalize;
 
 /**
  * @author Artem Khvastunov
  */
-public class THashMapCreationInspection extends BaseJavaLocalInspectionTool {
+public class THashMapCreationInspection extends TroveInspection {
 
+    @Nls
     @NotNull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new THashMapCreationJavaElementVisitor(holder);
-    }
-
-    @NotNull
     public String getDisplayName() {
         return "Trove 'THashMap' instead of JDK 'HashMap'";
     }
 
     @NotNull
-    public String getGroupDisplayName() {
-        return GROUP_DISPLAY_NAME;
-    }
-
     @Override
-    public boolean isEnabledByDefault() {
-        return true;
+    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+        return new THashMapCreationJavaElementVisitor(holder);
     }
 
     private class THashMapCreationJavaElementVisitor extends JavaElementVisitor {

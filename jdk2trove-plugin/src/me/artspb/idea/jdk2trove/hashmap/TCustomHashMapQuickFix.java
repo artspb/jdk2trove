@@ -5,9 +5,8 @@ import com.intellij.psi.PsiNewExpression;
 import me.artspb.idea.jdk2trove.TroveQuickFix;
 import org.jetbrains.annotations.NotNull;
 
-import static me.artspb.idea.jdk2trove.TroveUtils.JDK_MAP;
-import static me.artspb.idea.jdk2trove.TroveUtils.TROVE_CUSTOM_HASH_MAP;
-import static me.artspb.idea.jdk2trove.TroveUtils.TROVE_IDENTITY_HASHING_STRATEGY;
+import static java.lang.String.format;
+import static me.artspb.idea.jdk2trove.TroveUtils.*;
 
 /**
  * @author Artem Khvastunov
@@ -17,7 +16,7 @@ public class TCustomHashMapQuickFix extends TroveQuickFix {
     private static final TCustomHashMapQuickFix INSTANCE = new TCustomHashMapQuickFix();
 
     private TCustomHashMapQuickFix() {
-        super(JDK_MAP, TROVE_CUSTOM_HASH_MAP);
+        super(JDK_MAP, format(TROVE_HASH_MAP, "Custom"));
     }
 
     public static TCustomHashMapQuickFix getInstance() {

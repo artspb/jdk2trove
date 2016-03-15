@@ -1,41 +1,33 @@
 package me.artspb.idea.jdk2trove.hashset;
 
-import com.intellij.codeInspection.BaseJavaLocalInspectionTool;
 import com.intellij.codeInspection.LocalQuickFix;
 import com.intellij.codeInspection.ProblemsHolder;
 import com.intellij.psi.*;
+import me.artspb.idea.jdk2trove.TroveInspection;
 import me.artspb.idea.jdk2trove.TroveUtils;
+import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 
 import static com.intellij.psi.util.PsiTreeUtil.getChildOfType;
-import static me.artspb.idea.jdk2trove.InspectionProvider.GROUP_DISPLAY_NAME;
 import static me.artspb.idea.jdk2trove.TroveUtils.JDK_HASH_SET;
 import static me.artspb.idea.jdk2trove.TroveUtils.JDK_LINKED_HASH_SET;
 
 /**
  * @author Artem Khvastunov
  */
-public class THashSetCreationInspection extends BaseJavaLocalInspectionTool {
+public class THashSetCreationInspection extends TroveInspection {
 
+    @Nls
     @NotNull
     @Override
-    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
-        return new THashSetCreationJavaElementVisitor(holder);
-    }
-
-    @NotNull
     public String getDisplayName() {
         return "Trove 'THashSet' instead of JDK 'HashSet'";
     }
 
     @NotNull
-    public String getGroupDisplayName() {
-        return GROUP_DISPLAY_NAME;
-    }
-
     @Override
-    public boolean isEnabledByDefault() {
-        return true;
+    public PsiElementVisitor buildVisitor(@NotNull final ProblemsHolder holder, boolean isOnTheFly) {
+        return new THashSetCreationJavaElementVisitor(holder);
     }
 
     private class THashSetCreationJavaElementVisitor extends JavaElementVisitor {
